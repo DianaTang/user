@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
 from flask.helpers import make_response
+from model.person import Person
 
 app = Flask(__name__)
 
@@ -9,17 +10,20 @@ persons = []
 
 @app.route("/user", methods = ['POST'])
 def add_user():
-    personsSize = len(persons)
+    global indexCount 
     param_values=request.get_json()
     persons.append ({
-        'id': personsSize,
+        'id': indexCount,
         'first': param_values['first_name'],
         'last' : param_values['last_name'],
         'company' : param_values['client_name']
     })
-    global indexCount 
     indexCount += 1
-    return jsonify(persons[personsSize])
+    return jsonify(persons[len(persons)-1]) 
+
+@app.route ("/user/all")
+def find_all():
+    return jsonify (persons)
 
 @app.route('/user/<int:id>', methods = ['GET'])
 def find_user(id):
