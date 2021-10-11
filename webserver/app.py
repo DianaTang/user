@@ -4,20 +4,8 @@ from flask.helpers import make_response
 
 app = Flask(__name__)
 
-persons = [
-    {
-        'id': 0,
-        'first': 'Diana',
-        'last': 'Tang',
-        'company': 'Air-tek'
-    },
-    {
-        'id': 1,
-        'first': 'Jeff',
-        'last': 'Hau',
-        'company': 'Hau'
-    }
-]
+indexCount =0
+persons = []
 
 @app.route("/user", methods = ['POST'])
 def add_user():
@@ -29,6 +17,8 @@ def add_user():
         'last' : param_values['last_name'],
         'company' : param_values['client_name']
     })
+    global indexCount 
+    indexCount += 1
     return jsonify(persons[personsSize])
 
 @app.route('/user/<int:id>', methods = ['GET'])
