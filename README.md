@@ -3,8 +3,9 @@ README
 Install python 3.8
 Install the applications in the requirements.txt
 
-checkout this code 
-in command line > python3 app.py
+checkout this code.  
+cd webserver 
+command line > python3 app.py
 
 use terminal or any tool to do following request: 
 
