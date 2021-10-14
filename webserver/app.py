@@ -1,3 +1,4 @@
+import json
 from flask import Flask
 from flask import request, jsonify
 from flask.helpers import make_response
@@ -12,35 +13,32 @@ persons = []
 def add_user():
     global indexCount 
     param_values=request.get_json()
-    persons.append ({
-        'id': indexCount,
-        'first': param_values['first_name'],
-        'last' : param_values['last_name'],
-        'company' : param_values['client_name']
-    })
+    new_person = Person (indexCount, param_values['first_name'], param_values['last_name'], param_values['client_name'],)
+    persons.append (new_person)
     indexCount += 1
-    return jsonify(persons[len(persons)-1]) 
+    return json.dumps(new_person.__dict__)
 
 @app.route ("/user/all")
 def find_all():
-    return jsonify (persons)
+    json_string = json.dumps([person.__dict__ for person in persons])
+    return json_string
 
 @app.route('/user/<int:id>', methods = ['GET'])
 def find_user(id):
-    results = []
     for person in persons:
-        if person['id'] == id:
-            results.append(person)
-    return jsonify(results)
+        if person.id == id:
+            return json.dumps (person.__dict__)
+    res = make_response (jsonify ({"error" : "Person not found"}), 204)
+    return res
 
 @app.route('/user/<int:id>', methods = ['DELETE'])
 def delete_user(id):
     for person in persons:
-        if person['id'] == id:
+        if person.id == id:
             persons.remove(person)
             res = make_response(jsonify({}), 200)
             return res
-    res = make_response (jsonify({"error" : "Person not found"}), 404)
+    res = make_response (jsonify({"error" : "Person not found"}), 204)
     return res
 
 if __name__ == "__main__":
