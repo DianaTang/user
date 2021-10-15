@@ -6,6 +6,6 @@ A web server written in python.
 - `python -m venv venv`
 - `source venv/bin/activate` on Unix
 - `pip install -r requirements.txt`
-- `python3 webserver/app.py`
+- `python webserver/app.py`
 
 ---
