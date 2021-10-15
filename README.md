@@ -1,4 +1,4 @@
-A web server written in python.
+A web service written in python.
 
 ---
 
