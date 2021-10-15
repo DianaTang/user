@@ -1,6 +1,6 @@
-README
+A web server written in python.
 
-Install python 3.8
+-Install python 3.8
 Install the applications in the requirements.txt
 
 checkout this code.  
