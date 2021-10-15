@@ -1,5 +1,14 @@
 A web server written in python.
 
+- Install Python 3.8
+- `python -m venv venv`
+- `source venv/bin/activate` on Unix
+- `pip install -r requirements.txt`
+- `cd webserver
+- Open `localhost:5000` to browse and generate logs
+
+---
+
 -Install python 3.8
 Install the applications in the requirements.txt
 
